@@ -1,19 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import Q
-from django.core.paginator import Paginator
-from django import forms
+from django.shortcuts import render
 
-from contact.models import Contact
-
-
-class ContactForm(forms.ModelForm):
-    class Meta:
-        model = Contact
-        fields = (
-            'first_name',
-            'last_name',
-            'phone',
-        )
+from contact.forms import ContactForm
 
 
 def create(request):
@@ -22,15 +9,15 @@ def create(request):
             'form': ContactForm(request.POST)
         }
 
-    return render(
-        request,
-        'contact/create.html',
-        context
-    )
+        return render(
+             request,
+             'contact/create.html',
+             context
+         )
 
     context = {
-        'form': ContactForm()
-    }
+         'form': ContactForm()
+     }
 
     return render(
         request,
